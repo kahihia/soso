@@ -1,0 +1,102 @@
+<ion-view view-title="个人中心" hide-nav-bar="{{ !show_nav_bar }}">
+    <ion-content class="profile-background" scroll="false">
+    <div class="row profile-capital">
+        <div class="col">
+            <div class="capital-title">帐户余额</div>
+            <h4 class="capital-label" ng-class="{ 'rise' : account.Amount >= 0, 'fall' : account.Amount < 0 }">
+                {{ account.Amount }}
+            </h4>
+        </div>
+        <div class="col">
+            <div class="capital-title">帐户净值</div>
+            <h4 class="capital-label" ng-class="{ 'rise' : account.Net >= 0, 'fall' : account.Net < 0 }">
+                {{ account.Net }}
+            </h4>
+        </div>
+        <div class="col">
+            <div class="capital-title">浮动盈亏</div>
+            <h4 class="capital-label" ng-class="{ 'rise' : account.Profit >= 0, 'fall' : account.Profit < 0 }">
+                {{ account.Profit }}
+            </h4>
+        </div>
+    </div>
+    <div class="row profile-capital">
+        <div class="col">
+            <div class="capital-title">占用保证金</div>
+            <h4 class="capital-label" ng-class="{ 'rise' : account.OccupiedMoney >= 0, 'fall' : account.OccupiedMoney < 0 }">
+                {{ account.OccupiedMoney }}
+            </h4>
+        </div>
+        <div class="col">
+            <div class="capital-title">冻结保证金</div>
+            <h4 class="capital-label" ng-class="{ 'rise' : account.FreezingMoney >= 0, 'fall' : account.FreezingMoney < 0 }">
+                {{ account.FreezingMoney }}
+            </h4>
+        </div>
+        <div class="col">
+            <div class="capital-title">可用保证金</div>
+            <h4 class="capital-label" ng-class="{ 'rise' : account.FreeMoney >= 0, 'fall' : account.FreeMoney < 0 }">
+                {{ account.FreeMoney }}
+            </h4>
+        </div>
+    </div>
+    <div class="row profile-capital">
+        <div class="col">
+            <div class="capital-title">持仓数量</div>
+            <h4 class="capital-label rise">
+                {{ order_quantity_sum() }}
+            </h4>
+        </div>
+        <div class="col">
+            <div class="capital-title">挂单数量</div>
+            <h4 class="capital-label rise">
+                {{ limit_order_quantity_sum() }}
+            </h4>
+        </div>
+        <div class="col">
+            <div class="capital-title">风险系数</div>
+            <h4 class="capital-label" ng-class="{ 'rise' : account.Risk >= 0, 'fall' : account.Risk < 0 }">
+                {{ account.RiskString }}
+            </h4>
+        </div>
+    </div>
+    <div class="row profile-menu">
+        <div class="col">
+            <div class="list">
+                <a class="item item-input" href="javascript:;" ng-click="toggle_capital_menu()">
+                    <i class="icon ion-social-usd"></i>
+                    资金管理
+                </a>
+                <div id="capital-menu" class="sub-profile-menu">
+                    <a class="item item-input" href="javascript:;" ng-click="capital_history_modal.show()">
+                        <i class="icon ion-social-usd"></i>
+                        资金历史
+                    </a>
+                    <a class="item item-input" href="javascript:;" ng-click="show_deposit_modal()">
+                        <i class="icon ion-social-usd"></i>
+                        用户入金
+                    </a>
+                    <a class="item item-input" href="javascript:;" ng-click="show_withdraw_modal()">
+                        <i class="icon ion-social-usd"></i>
+                        用户出金
+                    </a>
+                </div>
+                <a class="item item-input" href="javascript:;" ng-click="show_bank_modal()">
+                    <i class="icon ion-person"></i>
+                    修改资料
+                </a>
+                <a class="item item-input" href="#/tab/history/0">
+                    <i class="icon ion-locked"></i>
+                    修改密码
+                </a>
+            </ul>
+        </div>
+    </div>
+    </ion-content>
+    <div class="alert" ng-class="{ 'hide' : !is_loading }">
+        <ion-spinner icon="android"></ion-spinner>
+    </div>
+    <div class="alert" ng-class="{ 'hide' : message === '' }">
+        {{ message }}
+    </div>
+</ion-view>
